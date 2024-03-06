@@ -1,0 +1,205 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 15px;
+    align-items: center; 
+
+}
+
+.page-container {
+    width: 80%;
+    max-width: 900px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* min-height: 100vh; */
+    height: 100vh;
+    margin: auto;  
+    /* background: url('{% static "images/background.jpg" %}') center center no-repeat;
+    background-size: cover; */
+}
+
+
+header {
+    /* background-color: rgb(247, 247, 247); */
+    padding: 0px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+h1 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 15px;
+
+}
+
+h2 {
+    color: #001F3F;
+    margin-bottom: 20px;
+    font-size: 15px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+textarea {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #001F3F;
+    transition: border 0.3s ease;
+    width: 500px;
+    height: 60px;
+    font-size: 14px;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333333;
+
+}
+
+textarea:focus {
+    border: 1px solid #2980b9;
+}
+
+button {
+    padding: 12px;
+    background-color: #001F3F;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    border-radius: 8px;
+    outline: none;
+    width: 100px;
+}
+
+button:hover {
+    background-color: #001A35;
+}
+
+h3 {
+    color: #001F3F;
+    margin-top: 20px;
+}
+
+label{
+    margin-bottom: 10px;
+}
+p.result {
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    display: inline-block;
+    width: 80%;
+    text-align: center; /* Ajout de la propriété pour centrer le texte */
+    margin: 0 auto; /* Ajout de la propriété pour centrer le bloc */
+    margin-bottom: 10px;
+}
+
+/* Color 1 */
+p.result_sentence {
+    background-color: #d2b48c; /* Tan */
+}
+
+/* Color 2 */
+p.result_structure {
+    background-color: #d0e9c6; /* Tea Green */
+}
+
+/* Color 3 */
+p.result_postag {
+    background-color: #d6eaf8; /* Alice Blue */
+}
+
+/* Color 4 */
+p.result_fki {
+    background-color: #e1d5e7; /* Lavender Purple */
+
+}
+
+/* Color 5 */
+p.result_efl {
+    background-color: #f2dede; /* Misty Rose */
+}
+
+footer {
+    background-color: #ffffff;
+    padding: 5px;
+    margin-top: auto;
+    color: #555555;
+    font-size: 12px;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.logo-text {
+    margin-left: 10px;
+    color: #333333;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.em-square {
+    position: relative;
+    display: inline-block;
+    font-size: 16px; /* Set font-size to the desired size for the letters */
+    color: #ffffff; /* Set the color of the letters to white */
+}
+
+.em-square::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px; /* Adjust the size of the square as needed */
+    height: 30px; /* Adjust the size of the square as needed */
+    background-color: #e0dede; /* Set the color of the square to nude */
+    border-radius: 6px; /* Adjust the border-radius to create a rounded square */
+    z-index: -1; /* Move the square behind the text */
+}
+
+
+/* @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} */
