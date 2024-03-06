@@ -1,0 +1,99 @@
+<!-- postag.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MG-NLP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+    <link rel="shortcut icon" href="{% static 'images/mg.svg.ico' %}" type="image/x-icon" />
+
+
+</head>
+<body>
+    <div class="page-container">
+<header>
+    <div class="logo-container" style="text-align: center;">
+        <h1><img src="{% static 'images/mg.svg.ico' %}" alt="Madagascar et Recherche" width=""></h1>
+        <div class="logo-text" style="font-size: 16px;">MG-NLP | POS Tag | EFL | FKI</div>
+    </div>
+</header>
+
+
+<p>Enter a <strong>complete sentence malagasy</strong> (no single words!)</p>
+<form id="analyseForm" method="post" action="{% url 'postag_vos' %}">
+    {% csrf_token %}
+    <textarea name="user_sentence" rows="3" cols="50" required style="color: #333333;">Izy dia hitan'Andriamanitra fa tsara.</textarea>
+
+    <button type="submit" id="analyseButton">Analyse</button>
+</form>
+
+<!-- loading -->
+<div id="loading" style="display: none;">
+    <img src="{% static 'images/loading.gif' %}" alt="Loading..." id="loadingImage" style="width: 30px;" />
+</div>
+
+{% if user_sentence %}
+    <h3>Result :</h3>
+    <!-- <p class="result result_sentence">Sentence (Fehezanteny)</p> -->
+    <label>{{ user_sentence }}</label>
+    <p class="result result_structure">Structure -> {{ structure_prediction }} </p>
+    <!-- <label>{{ structure_prediction }} </label> -->
+    <p class="result result_postag">POS -> {{ predictions_pos_formatted }}</p>
+    <!-- <label>{{ predictions_pos_formatted }}</label> -->
+    <p class="result result_fki">Sentence Summary -> {{ fki }}</p>
+    <!-- <label>{{ fki }}</label> -->
+    <p class="result result_efl">VOS -> {{ predictions_vos_formatted }}</p>
+    <!-- <label>{{ predictions_vos }} </label> -->
+
+
+    <!-- <p>Summary : {{ predictions_summary }} </p> -->
+{% endif %}
+<!-- <p class="em-square">EM</p> -->
+
+<!-- Section pour afficher les notifications -->
+<div id="notification" style="display: none;">
+    <p id="notification-message">{{ error_message }}</p>
+</div>
+
+    <footer>
+        &copy; 2024 mg-smart-lingua-discover. All right reserved.
+    </footer>
+    
+</div>
+
+</body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var analyseForm = document.getElementById('analyseForm');
+        var loading = document.getElementById('loading');
+
+        analyseForm.addEventListener('submit', function () {
+            loading.style.display = 'block';
+        });
+
+        // Afficher la notification si elle est présente
+        var errorMessage = "{{ error_message }}";
+        var sentenceMultipleError = "{{ sentence_multiple_error }}";
+        if (errorMessage || sentenceMultipleError) {
+            var notification = document.getElementById('notification');
+            var notificationMessage = document.getElementById('notification-message');
+            if (errorMessage) {
+                notificationMessage.textContent = errorMessage;
+            } else {
+                notificationMessage.textContent = sentenceMultipleError;
+            }
+            notification.style.display = 'block';
+        }
+
+
+    });
+</script>
+</html>
