@@ -1,27 +1,26 @@
 # MG-SLD (Malagasy Smart Lingua Discover)
 
-MG-SLD est un projet de recherche spécialisé dans le traitement du langage naturel (NLP) pour la langue malgache. Il permet notamment l'étiquetage morphosyntaxique (**Part-of-Speech tagging**) et l'analyse approfondie des structures de phrases.
+MG-SLD is a research project specializing in natural language processing (NLP) for the Malagasy language. It enables morphosyntactic tagging (**Part-of-Speech tagging**) and in-depth analysis of sentence structures.
 
-## 🛠 Installation et Configuration
+## 🛠 Installation and Configuration
 
-Ce projet est optimisé pour **Python 3.11**, garantissant une compatibilité stable avec **TensorFlow 2.15/2.16** et **Keras**.
+This project is optimized for **Python 3.11**, ensuring stable compatibility with **TensorFlow 2.15/2.16** and **Keras**.
 
-### 1. Préparation de l'environnement Python
+### 1. Preparing the Python environment
 
-En 2026, **Python 3.11** n'étant plus la version standard du système, il est recommandé d'utiliser `pyenv` pour une gestion isolée :
+In 2026, **Python 3.11** is no longer the standard version of the system, so it is recommended to use `pyenv` for isolated management:
 
 ```bash
-# Installer la version spécifique
+# Install the specific version
 pyenv install 3.11.7
 
-# Définir la version locale pour ce dossier
+# Set the local version for this folder
 pyenv local 3.11.7
-
 ```
 
-### 2. Création et activation de l'environnement virtuel
+### 2. Creating and activating the virtual environment
 ```bash
-# Création de l'environnement
+# Creating the environment
 python -m venv venv-3.11.7
 
 # Activation (Linux/macOS)
@@ -29,62 +28,69 @@ source venv-3.11.7/bin/activate
 
 # Activation (Windows)
 venv-3.11.7\Scripts\activate
-
 ```
 
-### 3. Installation des dépendances
+### 3. Installing dependencies
 ```bash
-# Mise à jour de pip
+# Updating pip
 pip install --upgrade pip
 
-# Installation des dépendances
+# Installing dependencies
 pip install -r requirements.txt
 
-# En cas de problèmes de réseau
+# In case of network issues
 pip install --default-timeout=10000 -r requirements.txt
-
 ```
 
-### 4. Configuration des ressources NLTK
-Le projet utilise la bibliothèque NLTK pour la segmentation des mots. Vous devez impérativement installer les modèles de données suivants après avoir activé votre environnement :
+### 4. Configuring NLTK resources
+The project uses the NLTK library for word segmentation. You must install the following data models after activating your environment:
 
-Méthode manuelle (via l'interpréteur Python) :
+Manual method (via the Python interpreter):
 ```bash
 import nltk
-nltk.download('punkt')
-nltk.download('punkt_tab')
+nltk.download(‘punkt’)
+nltk.download(‘punkt_tab’)
 ```
 
-## 🚀 Utilisation
-Pour lancer l'application Django localement :
+## 🚀 Usage
+To launch the Django application locally:
 
-### 1. Appliquez les migrations (si nécessaire)
+### 1. Apply migrations (if necessary)
 ```bash
 python manage.py migrate
 ```
 
-### 2. Démarrez le serveur
+### 2. Start the server
 ```bash
 python manage.py runserver
 ```
 
-### 3. Accédez à l'interface
-Rendez-vous sur **http://127.0.0.1:8000** dans votre navigateur.
+### 3. Access the interface
+Go to **http://127.0.0.1:8000** in your browser.
 
-#### 📂 Structure du projet
+#### 📂 Project structure
 
 ```bash
 MG-SLD/
-├── core/                 # Contient la logique principale (views, urls)
+├── core/                 # Contains the main logic (views, URLs)
 ├── data/
-│   ├── models/          # Modèles entraînés (.h5)
-│   └── pretraining/     # Contient les encodeurs (.joblib)
-├── static/              # Fichiers CSS, images et ressources visuelles
-├── requirements.txt     # Dépendances du projet
-└── manage.py           # Script de gestion Django
+│   ├── corpus/
+│   ├── functions/
+│   ├── models/          # Trained models (.h5)
+│   └── pretraining/     # Contains encoders (.joblib)
+├── notebooks/
+├── static/              # CSS files, images, and visual resources
+├── staticfiles/         
+├── staticfiles_build/ 
+├── templates/         
+│   ├── postag.html
+├── vev-3.11.7
+├── manage.py
+├── README.md
+└── requirements.txt     # Project dependencies
 ```
 
-# ✍️ Auteur
+# ✍️ Author
 Vatosoa Razafindrazaka 
 
-## ⭐ N'hésitez pas à contribuer ou à signaler des problèmes via les Issues !
+## ⭐ Feel free to contribute or report issues via Issues!
