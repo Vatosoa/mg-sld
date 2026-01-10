@@ -1,2 +1,45 @@
-core/__pycache__
-mg-env
+# Fichiers Python compilés
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Environnements virtuels
+venv-3.11.7/
+
+# Dossiers générés par Django
+staticfiles/             # Dossiers de fichiers statiques collectés par Django
+staticfiles_build/       # Dossiers de fichiers statiques construits
+*.log                    # Ignorer les fichiers de log générés
+*.pot                    # Fichiers de traduction Django
+db.sqlite3               # Ignorer la base de données SQLite
+*.sqlite3                # Si vous utilisez SQLite pour les bases de données
+
+# Dossiers et fichiers de données
+data/corpus/             # Dossier contenant les corpus, à ignorer si vous ne voulez pas versionner ces données
+data/functions/          # Dossier des fonctions locales à ignorer
+data/models/             # Modèles d'entraînement (fichiers .h5)
+data/pretraining/        # Encodeurs pour l'entraînement (.joblib)
+
+# Fichiers de configuration locaux
+*.env
+*.local
+
+# Dossiers de notebooks Jupyter
+notebooks/               # Dossier contenant des notebooks Jupyter, généralement non versionnés
+
+# Sauvegardes et fichiers temporaires
+*~
+*.bak
+*.swp
+
+# Fichiers et répertoires spécifiques à l'éditeur
+.idea/                   # Si vous utilisez PyCharm, ignorez les fichiers d'IDE
+.vscode/                 # Si vous utilisez Visual Studio Code
+
+# Fichiers de configuration spécifiques
+*.DS_Store               # Ignore les fichiers spécifiques à macOS
+Thumbs.db                # Ignore les fichiers spécifiques à Windows
+
+# Fichiers de cache
+.cache/                  # Cache des applications et des dépendances
