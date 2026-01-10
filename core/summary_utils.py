@@ -1,4 +1,6 @@
 # summary_utils.py
+import os
+from django.conf import settings
 import joblib
 import nltk
 import re
@@ -6,9 +8,6 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
-
-import os
-from django.conf import settings
 
 max_summary_len = 100
 
@@ -59,8 +58,6 @@ def decode_sequence(encoder_model, decoder_model, input_seq, y_tokenizer, revers
     return decoded_sentence.strip()
 
 
-
-
 def seq2summary(input_seq, reverse_target_word_index):
     new_string = ''
     for i in input_seq:
@@ -77,13 +74,22 @@ def seq2text(input_seq, reverse_source_word_index):
 
 
 def load_summary_resources():
-    load_model_summary = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/model-mg-summaryfki.h5'
-    encoder_model_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/encoder_mode-mg-summaryfki.h5'
-    decoder_model_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/decoder_model-mg-summaryfki.h5'
-    x_tokenizer_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-summaryfki/x_tokenizer.joblib'
-    y_tokenizer_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-summaryfki/y_tokenizer.joblib'
-    reverse_target_word_index_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/functions/reverse_target_word_index.joblib'
+    # 1. Définition des dossiers de base
+    models_dir = os.path.join(settings.BASE_DIR, 'data', 'models')
+    pretraining_dir = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-summaryfki')
+    functions_dir = os.path.join(settings.BASE_DIR, 'data', 'functions')
 
+    # 2. Construction dynamique des chemins de fichiers
+    load_model_summary = os.path.join(models_dir, 'model-mg-summaryfki.h5')
+    encoder_model_path = os.path.join(models_dir, 'encoder_mode-mg-summaryfki.h5')
+    decoder_model_path = os.path.join(models_dir, 'decoder_model-mg-summaryfki.h5')
+    
+    x_tokenizer_path = os.path.join(pretraining_dir, 'x_tokenizer.joblib')
+    y_tokenizer_path = os.path.join(pretraining_dir, 'y_tokenizer.joblib')
+    
+    reverse_target_word_index_path = os.path.join(functions_dir, 'reverse_target_word_index.joblib')
+
+    # 3. Chargement des modèles et fichiers
     loaded_model = load_model(load_model_summary)
     loaded_encoder_model = load_model(encoder_model_path)
     loaded_decoder_model = load_model(decoder_model_path)

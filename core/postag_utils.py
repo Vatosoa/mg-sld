@@ -1,4 +1,6 @@
 # postag_utils.py
+import os
+from django.conf import settings
 import joblib
 import nltk
 import re
@@ -7,9 +9,6 @@ import numpy as np
 
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
-
-import os
-from django.conf import settings
 
 def tokenize_words_pos(text):
     if isinstance(text, str):
@@ -20,21 +19,16 @@ def tokenize_words_pos(text):
     else:
         return []
 
-
-def load_pos_tagging_model():
-    # Chargement du modèle de POS tagging
-    model = load_model('/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/model-mg-postag.h5')
-    token_encoder = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-postag/token_encoder.joblib')
-    label_encoder = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-postag/label_encoder.joblib')    
-    # model_path = os.path.join(settings.BASE_DIR, 'data', 'models', 'model-mg-postag.h5')
+def load_pos_tagging_model(): 
+    model_path = os.path.join(settings.BASE_DIR, 'data', 'models', 'model-mg-postag.h5')
 
     # Chargement des encodeurs
-    # token_enc_path = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-postag', 'token_encoder.joblib')
-    # label_enc_path = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-postag', 'label_encoder.joblib')
+    token_enc_path = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-postag', 'token_encoder.joblib')
+    label_enc_path = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-postag', 'label_encoder.joblib')
  
-    # model = load_model(model_path)
-    # token_encoder = joblib.load(token_enc_path)
-    # label_encoder = joblib.load(label_enc_path)
+    model = load_model(model_path)
+    token_encoder = joblib.load(token_enc_path)
+    label_encoder = joblib.load(label_enc_path)
  
     return model, token_encoder, label_encoder
  
