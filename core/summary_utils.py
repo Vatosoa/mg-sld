@@ -5,11 +5,18 @@ import re
 import numpy as np
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
-from keras.preprocessing.text import Tokenizer
+# from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+import os
+from django.conf import settings
 
 max_summary_len = 100
 
-stopwords_file_path = '/home/vatosoa/mg-smart-lingua-discover/data/corpus/stopwords-td.txt'
+# Construct the path relative to your project root
+stopwords_file_path = os.path.join(settings.BASE_DIR, 'data', 'corpus', 'stopwords-td.txt')
+
+# Open the file using this dynamic path
 with open(stopwords_file_path, 'r', encoding='utf-8') as file:
     stop_words = set(file.read().splitlines())
 
@@ -71,12 +78,12 @@ def seq2text(input_seq, reverse_source_word_index):
 
 
 def load_summary_resources():
-    load_model_summary = '/home/vatosoa/mg-smart-lingua-discover/data/models/model-mg-summaryfki.h5'
-    encoder_model_path = '/home/vatosoa/mg-smart-lingua-discover/data/models/encoder_mode-mg-summaryfki.h5'
-    decoder_model_path = '/home/vatosoa/mg-smart-lingua-discover/data/models/decoder_model-mg-summaryfki.h5'
-    x_tokenizer_path = '/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-summaryfki/x_tokenizer.joblib'
-    y_tokenizer_path = '/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-summaryfki/y_tokenizer.joblib'
-    reverse_target_word_index_path = '/home/vatosoa/mg-smart-lingua-discover/data/functions/reverse_target_word_index.joblib'
+    load_model_summary = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/model-mg-summaryfki.h5'
+    encoder_model_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/encoder_mode-mg-summaryfki.h5'
+    decoder_model_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/decoder_model-mg-summaryfki.h5'
+    x_tokenizer_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-summaryfki/x_tokenizer.joblib'
+    y_tokenizer_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-summaryfki/y_tokenizer.joblib'
+    reverse_target_word_index_path = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/functions/reverse_target_word_index.joblib'
 
     loaded_model = load_model(load_model_summary)
     loaded_encoder_model = load_model(encoder_model_path)

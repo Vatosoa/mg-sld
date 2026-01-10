@@ -10,15 +10,32 @@ from keras.preprocessing.sequence import pad_sequences
 
 from .postag_utils import tokenize_words_pos
 
-# td = Tso-drafitra
-# md = Mivadi-drafitra
-stopwords_file_path_td = '/home/vatosoa/mg-sld/data/corpus/stopwords-td.txt'
-with open(stopwords_file_path_td,'r', encoding='utf-8') as file:
+import os
+from django.conf import settings
+
+# Construct the path relative to your project root
+stopwords_file_path_td = os.path.join(settings.BASE_DIR, 'data', 'corpus', 'stopwords-td.txt')
+
+# Open the file using this dynamic path
+with open(stopwords_file_path_td, 'r', encoding='utf-8') as file:
     stop_words_td = set(file.read().splitlines())
 
-stopwords_file_path_md = '/home/vatosoa/mg-sld/data/corpus/stopwords-md.txt'
-with open(stopwords_file_path_md,'r', encoding='utf-8') as file:
+# Construct the path relative to your project root
+stopwords_file_path_md = os.path.join(settings.BASE_DIR, 'data', 'corpus', 'stopwords-md.txt')
+
+# Open the file using this dynamic path
+with open(stopwords_file_path_md, 'r', encoding='utf-8') as file:
     stop_words_md = set(file.read().splitlines())
+
+# td = Tso-drafitra
+# md = Mivadi-drafitra
+# stopwords_file_path_td = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/corpus/stopwords-td.txt'
+# with open(stopwords_file_path_td,'r', encoding='utf-8') as file:
+    # stop_words_td = set(file.read().splitlines())
+
+# stopwords_file_path_md = '/home/vatosoa/Documents/masterRecherche/mg-sld/data/corpus/stopwords-md.txt'
+# with open(stopwords_file_path_md,'r', encoding='utf-8') as file:
+    # stop_words_md = set(file.read().splitlines())
 
 
 
@@ -81,19 +98,41 @@ def align_tokens_with_original(tokens_md, tokens_original):
     return new_tokens
 
 
-
-
 def load_structure_vos_model():
     # Chargement du modèle de POS tagging
-    model_td = load_model('/home/vatosoa/mg-sld/data/models/model-mg-structurevos-td.h5')
-    model_md = load_model('/home/vatosoa/mg-sld/data/models/model-mg-structurevos-md.h5')
+    model_td = load_model('/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/model-mg-structurevos-td.h5')
+    model_md = load_model('/home/vatosoa/Documents/masterRecherche/mg-sld/data/models/model-mg-structurevos-md.h5')
     # Chargement des encodeurs
-    token_encoder_td = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/token_encoder-td.joblib')
-    token_encoder_md = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/token_encoder-md.joblib')
-    label_encoder_td = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/label_encoder-td.joblib')    
-    label_encoder_md = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/label_encoder-md.joblib')    
+    token_encoder_td = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-structurevos/token_encoder-td.joblib')
+    token_encoder_md = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-structurevos/token_encoder-md.joblib')
+    label_encoder_td = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-structurevos/label_encoder-td.joblib')    
+    label_encoder_md = joblib.load('/home/vatosoa/Documents/masterRecherche/mg-sld/data/pretraining/mg-structurevos/label_encoder-md.joblib')    
     return model_td, model_md, token_encoder_td, token_encoder_md, label_encoder_td, label_encoder_md
 
+
+# def load_structure_vos_model():
+#     # 1. Définition des chemins dynamiques pour les modèles
+#     path_model_td = os.path.join(settings.BASE_DIR, 'data', 'models', 'model-mg-structurevos-td.h5')
+#     path_model_md = os.path.join(settings.BASE_DIR, 'data', 'models', 'model-mg-structurevos-md.h5')
+
+#     # 2. Définition des chemins pour les encodeurs
+#     base_pretrain = os.path.join(settings.BASE_DIR, 'data', 'pretraining', 'mg-structurevos')
+    
+#     path_token_td = os.path.join(base_pretrain, 'token_encoder-td.joblib')
+#     path_token_md = os.path.join(base_pretrain, 'token_encoder-md.joblib')
+#     path_label_td = os.path.join(base_pretrain, 'label_encoder-td.joblib')
+#     path_label_md = os.path.join(base_pretrain, 'label_encoder-md.joblib')
+
+#     # 3. Chargement effectif des fichiers
+#     model_td = load_model(path_model_td)
+#     model_md = load_model(path_model_md)
+    
+#     token_encoder_td = joblib.load(path_token_td)
+#     token_encoder_md = joblib.load(path_token_md)
+#     label_encoder_td = joblib.load(path_label_td)
+#     label_encoder_md = joblib.load(path_label_md)
+    
+#     return model_td, model_md, token_encoder_td, token_encoder_md, label_encoder_td, label_encoder_md
 
 
 def predict_vos_structure(model_td, model_md, token_encoder_td, token_encoder_md, label_encoder_td, label_encoder_md, predictions_pos, sentence):

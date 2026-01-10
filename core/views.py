@@ -5,6 +5,8 @@ from .postag_utils import load_pos_tagging_model, predict_pos_tags, tokenize_wor
 from .vos_utils import load_structure_vos_model, predict_vos_structure, tokenize_words_md, tokenize_words_td
 from .summary_utils import load_summary_resources, predict_summary
 from keras.preprocessing.sequence import pad_sequences
+# from tensorflow.keras.preprocessing.sequence import pad_sequences
+
 import joblib
 
 
