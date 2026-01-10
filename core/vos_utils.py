@@ -12,11 +12,11 @@ from .postag_utils import tokenize_words_pos
 
 # td = Tso-drafitra
 # md = Mivadi-drafitra
-stopwords_file_path_td = '/home/vatosoa/mg-smart-lingua-discover/data/corpus/stopwords-td.txt'
+stopwords_file_path_td = '/home/vatosoa/mg-sld/data/corpus/stopwords-td.txt'
 with open(stopwords_file_path_td,'r', encoding='utf-8') as file:
     stop_words_td = set(file.read().splitlines())
 
-stopwords_file_path_md = '/home/vatosoa/mg-smart-lingua-discover/data/corpus/stopwords-md.txt'
+stopwords_file_path_md = '/home/vatosoa/mg-sld/data/corpus/stopwords-md.txt'
 with open(stopwords_file_path_md,'r', encoding='utf-8') as file:
     stop_words_md = set(file.read().splitlines())
 
@@ -85,13 +85,13 @@ def align_tokens_with_original(tokens_md, tokens_original):
 
 def load_structure_vos_model():
     # Chargement du modèle de POS tagging
-    model_td = load_model('/home/vatosoa/mg-smart-lingua-discover/data/models/model-mg-structurevos-td.h5')
-    model_md = load_model('/home/vatosoa/mg-smart-lingua-discover/data/models/model-mg-structurevos-md.h5')
+    model_td = load_model('/home/vatosoa/mg-sld/data/models/model-mg-structurevos-td.h5')
+    model_md = load_model('/home/vatosoa/mg-sld/data/models/model-mg-structurevos-md.h5')
     # Chargement des encodeurs
-    token_encoder_td = joblib.load('/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-structurevos/token_encoder-td.joblib')
-    token_encoder_md = joblib.load('/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-structurevos/token_encoder-md.joblib')
-    label_encoder_td = joblib.load('/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-structurevos/label_encoder-td.joblib')    
-    label_encoder_md = joblib.load('/home/vatosoa/mg-smart-lingua-discover/data/pretraining/mg-structurevos/label_encoder-md.joblib')    
+    token_encoder_td = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/token_encoder-td.joblib')
+    token_encoder_md = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/token_encoder-md.joblib')
+    label_encoder_td = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/label_encoder-td.joblib')    
+    label_encoder_md = joblib.load('/home/vatosoa/mg-sld/data/pretraining/mg-structurevos/label_encoder-md.joblib')    
     return model_td, model_md, token_encoder_td, token_encoder_md, label_encoder_td, label_encoder_md
 
 
